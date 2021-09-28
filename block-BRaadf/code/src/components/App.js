@@ -2,12 +2,15 @@ import React from "react";
 import SwitchButton from "./Button";
 import Header from "./Header";
 import Main from "./Main";
+import { DarkProvider } from "./DarkContext";
+
 
 class App extends React.Component {
   state = {
     isDarkMode: false,
   };
   changeMode = () => {
+    console.log(`yesss`);
     this.setState((state) => {
       return { isDarkMode: !state.isDarkMode };
     });
@@ -16,9 +19,12 @@ class App extends React.Component {
     let { isDarkMode } = this.state;
     return (
       <div className={`bg ${isDarkMode ? "bg-dark" : "bg-light"}`}>
-        <Header isDarkMode={isDarkMode} />
-        <Main isDarkMode={isDarkMode} />
-        <SwitchButton isDarkMode={isDarkMode} changeMode={this.changeMode} />
+        <DarkProvider value={{ isDarkMode, changeMode: this.changeMode }}>
+          <Header isDarkMode={isDarkMode} />
+          <Main isDarkMode={isDarkMode} />
+          {/* <SwitchButton isDarkMode={isDarkMode} changeMode={this.changeMode} /> */}
+          <SwitchButton />
+        </DarkProvider>
       </div>
     );
   }
