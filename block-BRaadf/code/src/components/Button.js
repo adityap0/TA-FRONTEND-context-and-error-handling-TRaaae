@@ -2,6 +2,7 @@ import React from "react";
 import { DarkConsumer } from "./DarkContext";
 
 export default function SwitchButton({ isDarkMode, changeMode }) {
+  
   return (
     <DarkConsumer>
       {(value) => {
